@@ -11,7 +11,7 @@ const webhookClient = new WebhookClient({ url: webhookUrl });
 
 let sentMessageId = null;
 
-// Функция для выполнения команды и получения результата
+
 function executeCommand(command) {
     return new Promise((resolve, reject) => {
         exec(command, (error, stdout, stderr) => {
@@ -46,7 +46,6 @@ async function sendOrUpdateEmbedWebhookMessage(embed1, embed2) {
     }
 }
 
-// Функция для получения данных о состоянии ботов через pm2
 function getBotStatus() {
     return new Promise((resolve, reject) => {
         pm2.list((err, list) => {
@@ -102,7 +101,7 @@ async function getServerInfo() {
     };
 }
 
-// Функция для обновления вебхука каждые 30 минут
+
 async function updateWebhookEvery3Minutes() {
     try {
         const botStatus = await getBotStatus();
@@ -147,8 +146,7 @@ async function updateWebhookEvery3Minutes() {
     }
 }
 
-// Запуск обновления вебхука каждые 30 минут
-setInterval(updateWebhookEvery3Minutes, 3 * 60 * 1000); // 3 минут в миллисекундах
 
-// Запуск приложения
+setInterval(updateWebhookEvery3Minutes, 3 * 60 * 1000); 
+
 updateWebhookEvery3Minutes();
