@@ -9,17 +9,17 @@ This project is a utility that monitors the status of multiple bots running thro
 Clone the repository:
 
 ```bash
-  git clone https://github.com/koetee/MonitoringUtils.git
+git clone https://github.com/koetee/MonitoringUtils.git
 ```
 Install the required dependencies:
 ```bash
- npm install
+npm install
 ```
 Create a .env file in the project directory and add your Discord webhook URL:
 ```bash
-  webhook_uri="https://discord.com/api/webhooks/your-webhook-id/your-webhook-token"
+webhook_uri="https://discord.com/api/webhooks/your-webhook-id/your-webhook-token"
 ```
 Run:
 ```bash
-  node monitoring.js
+node monitoring.js
 ```
