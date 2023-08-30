@@ -10,7 +10,7 @@ const webhookUrl = process.env.webhook_uri;
 const webhookClient = new WebhookClient({ url: webhookUrl });
 
 let sentMessageId = null;
-
+let selectedProcessIds = [3];
 
 function executeCommand(command) {
     return new Promise((resolve, reject) => {
@@ -54,7 +54,7 @@ function getBotStatus() {
                 return;
             }
 
-            const botStatus = list.map(bot => ({
+            const botStatus = list.filter(bot => selectedProcessIds.includes(bot.pm_id)).map(bot => ({
                 name: bot.name,
                 pid: bot.pid,
                 memory: `${(bot.monit.memory / 1024 / 1024).toFixed(2)} MB`,
@@ -108,7 +108,7 @@ async function updateWebhookEvery3Minutes() {
         const serverMetrics = await getServerInfo();
 
         const osInfo = new EmbedBuilder()
-            .setTitle('Информация о VDS/VPS 🖥️')
+            .setTitle('Информация о VDS/VPS')
             .addFields(
                 { name: '🔒 Использование памяти', value: serverMetrics.memoryUsage, inline: true },
                 { name: '💻 Использование CPU', value: serverMetrics.cpuUsage, inline: true },
@@ -147,6 +147,6 @@ async function updateWebhookEvery3Minutes() {
 }
 
 
-setInterval(updateWebhookEvery3Minutes, 3 * 60 * 1000); 
+setInterval(updateWebhookEvery3Minutes, 3 * 60 * 1000);
 
 updateWebhookEvery3Minutes();
